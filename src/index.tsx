@@ -1,11 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
 
+
+// Create a new component. This component should produce
+// some HTML
+const App = () => {
+  return <div>Hi!</div>;
+};
+
+// Take this component's generated HTML and put it
+// on the page (in the DOM)
 ReactDOM.render(
-  <App />,
+  <App  />,
   document.getElementById('root') as HTMLElement
 );
-registerServiceWorker();
