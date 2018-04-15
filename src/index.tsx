@@ -1,6 +1,7 @@
 import { SearchBar } from '@components/search-bar';
 import { VideoDetail } from '@components/video-detail';
 import { VideoList } from '@components/video-list';
+import * as _ from 'lodash';
 import * as React from 'react';
 import { Component } from 'react';
 import * as ReactDOM from 'react-dom';
@@ -30,16 +31,19 @@ class App extends Component<{}, IAppState> {
     };
 
     this.onVideoSelect = this.onVideoSelect.bind(this);
-    this.initYoutubeVideos = this.initYoutubeVideos.bind(this);
+    this.videoSearch = this.videoSearch.bind(this);
 
-    this.initYoutubeVideos();
+    this.videoSearch('typescript');
   }
 
   render() {
+    // Performance is terrible if we search on every keystroke
+    const videoSearch = _.debounce((term: string) => { this.videoSearch(term); }, 300);
+
     return (
       <div className='container'>
         <div className='row'>
-          <SearchBar />
+          <SearchBar onSearchTermChange={videoSearch} />
         </div>
         <div className='row'>
           <VideoDetail video={this.state.selectedVideo} />
@@ -50,10 +54,19 @@ class App extends Component<{}, IAppState> {
   }
 
   /**
-   * Initialize the list of YouTube Videos
+   * Update the selected video in state so that it displays for the user
+   * @param selectedVideo
    */
-  initYoutubeVideos() {
-    searchYoutube({ key: YOUTUBE_API_KEY, term: 'surfboards' }).then(videos => {
+  onVideoSelect(selectedVideo: IYoutubeVideo) {
+    this.setState({ selectedVideo });
+  }
+
+  /**
+   * Search for videos on YouTube
+   * @param term Search Term
+   */
+  videoSearch(term: string) {
+    searchYoutube({ key: YOUTUBE_API_KEY, term }).then(videos => {
       this.setState({
         videos,
         selectedVideo: videos[0]
@@ -61,14 +74,6 @@ class App extends Component<{}, IAppState> {
     }).catch(searchErr => {
       console.error(searchErr);
     });
-  }
-
-  /**
-   * Update the selected video in state so that it displays for the user
-   * @param selectedVideo
-   */
-  onVideoSelect(selectedVideo: IYoutubeVideo) {
-    this.setState({ selectedVideo });
   }
 }
 

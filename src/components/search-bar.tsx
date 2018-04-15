@@ -6,8 +6,12 @@ export interface ISearchState {
   term: string;
 }
 
-export class SearchBar extends Component<{}, ISearchState> {
-  constructor(props: any) {
+export interface ISearchProps {
+  onSearchTermChange(term: string): void;
+}
+
+export class SearchBar extends Component<ISearchProps, ISearchState> {
+  constructor(props: ISearchProps) {
     super(props);
 
     this.state = { term: '' };
@@ -21,7 +25,7 @@ export class SearchBar extends Component<{}, ISearchState> {
     return (
       <div className='col'>
         <div className='input-group search-bar'>
-          <div className='input-group-append'>
+          <div className='input-group-prepend'>
             <span className='input-group-text'>Search</span>
           </div>
           <input
@@ -35,14 +39,9 @@ export class SearchBar extends Component<{}, ISearchState> {
   }
 
   onInputChange(event: React.FormEvent<HTMLInputElement>) {
-    const newValue = this.formatCode(event.currentTarget.value);
-    this.setState({ term: newValue });
+    const term = event.currentTarget.value;
+    this.setState({ term });
+    this.props.onSearchTermChange(term);
   }
 
-  formatCode(inputString: string) {
-    let outputString = inputString;
-    outputString = outputString.replace(' ', '-');
-    outputString = outputString.toLowerCase();
-    return outputString;
-  }
 }
