@@ -11,6 +11,10 @@
     background-color: #eee;
   }
 
+  &.video-list-item-selected {
+    background-color: #dfddff;
+  }
+
   img {
     max-width: 64px;
     margin-right: 10px;

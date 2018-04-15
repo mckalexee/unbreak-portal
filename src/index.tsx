@@ -47,7 +47,10 @@ class App extends Component<{}, IAppState> {
         </div>
         <div className='row'>
           <VideoDetail video={this.state.selectedVideo} />
-          <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+          <VideoList
+            onVideoSelect={this.onVideoSelect}
+            videos={this.state.videos}
+            selectedVideo={this.state.selectedVideo} />
         </div>
       </div>
     );
