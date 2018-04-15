@@ -20,7 +20,7 @@ export class SearchBar extends Component<{}, ISearchState> {
   render() {
     return (
       <div className='col'>
-        <div className='input-group'>
+        <div className='input-group search-bar'>
           <div className='input-group-append'>
             <span className='input-group-text'>Search</span>
           </div>

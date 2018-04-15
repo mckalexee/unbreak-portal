@@ -1,0 +1,25 @@
+@import 'bootstrap/scss/bootstrap.scss';
+
+.search-bar {
+  margin: 20px 0;
+}
+
+.video-list-item {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  img {
+    max-width: 64px;
+    margin-right: 10px;
+  }
+}
+
+.video-detail .details {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

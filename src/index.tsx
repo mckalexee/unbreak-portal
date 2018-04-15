@@ -7,8 +7,8 @@ import * as ReactDOM from 'react-dom';
 import { YOUTUBE_API_KEY } from './consts';
 import { IYoutubeVideo, searchYoutube } from './search-youtube';
 
-import 'bootstrap/dist/css/bootstrap.css';
 
+import './styles/index.scss';
 
 searchYoutube({ key: YOUTUBE_API_KEY, term: 'surfboards' }).then(data => {
   console.log(data);

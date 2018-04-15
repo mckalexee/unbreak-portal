@@ -15,7 +15,7 @@ export const VideoListItem = ({ video, onVideoSelect }: IVideoListItemProps) => 
   }
 
   return (
-    <li  className='list-group-item' onClick={selectVideo}>
+    <li  className='list-group-item video-list-item' onClick={selectVideo}>
       <div className='video-list media'>
         <div className='media-left'>
           <img  src={imageUrl} alt='' className='media-object'/>
