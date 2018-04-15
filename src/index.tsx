@@ -18,34 +18,57 @@ searchYoutube({ key: YOUTUBE_API_KEY, term: 'surfboards' }).then(data => {
 
 interface IAppState {
   videos: IYoutubeVideo[];
+  selectedVideo: IYoutubeVideo | null;
 }
 
 class App extends Component<{}, IAppState> {
   constructor(props: any) {
     super(props);
-    this.state = { videos: [] };
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
-    searchYoutube({ key: YOUTUBE_API_KEY, term: 'surfboards' }).then(videos => {
-      this.setState({ videos });
-    }).catch(searchErr => {
-      console.error(searchErr);
-    });
+    this.onVideoSelect = this.onVideoSelect.bind(this);
+    this.initYoutubeVideos = this.initYoutubeVideos.bind(this);
+
+    this.initYoutubeVideos();
   }
 
   render() {
     return (
       <div className='container'>
         <div className='row'>
-        <SearchBar />
+          <SearchBar />
         </div>
         <div className='row'>
-        <VideoDetail video={this.state.videos[0]}/>
-        </div>
-        <div className='row'>
-        <VideoList videos={this.state.videos} />
+          <VideoDetail video={this.state.selectedVideo} />
+          <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
         </div>
       </div>
     );
+  }
+
+  /**
+   * Initialize the list of YouTube Videos
+   */
+  initYoutubeVideos() {
+    searchYoutube({ key: YOUTUBE_API_KEY, term: 'surfboards' }).then(videos => {
+      this.setState({
+        videos,
+        selectedVideo: videos[0]
+      });
+    }).catch(searchErr => {
+      console.error(searchErr);
+    });
+  }
+
+  /**
+   * Update the selected video in state so that it displays for the user
+   * @param selectedVideo
+   */
+  onVideoSelect(selectedVideo: IYoutubeVideo) {
+    this.setState({ selectedVideo });
   }
 }
 

@@ -21,14 +21,14 @@ export class SearchBar extends Component<{}, ISearchState> {
     return (
       <div className='col'>
         <div className='input-group'>
+          <div className='input-group-append'>
+            <span className='input-group-text'>Search</span>
+          </div>
           <input
             value={this.state.term}
             onChange={this.onInputChange}
             type='text' name='seach-bar'
             className='form-control' />
-          <div className='input-group-append'>
-            <span className='input-group-text'>{this.state.term}</span>
-          </div>
         </div>
       </div>
     );

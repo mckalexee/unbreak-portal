@@ -5,11 +5,17 @@ import { IYoutubeVideo } from '../search-youtube';
 
 export interface IVideoListProps {
   videos: IYoutubeVideo[];
+  onVideoSelect(selectedVideo: IYoutubeVideo): void;
 }
 
 export const VideoList = (props: IVideoListProps) => {
   const videoItems = props.videos.map((video, index) => {
-    return <VideoListItem video={video} key={video.etag} />;
+    return (
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        video={video}
+        key={video.etag} />
+    );
   });
 
   return (

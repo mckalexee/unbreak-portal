@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IYoutubeVideo } from '../search-youtube';
 
-export const VideoDetail = ({ video }: { video: IYoutubeVideo }) => {
+export const VideoDetail = ({ video }: { video: IYoutubeVideo | null }) => {
   if (!video) {
     return (
       <div className='col'>
@@ -14,7 +14,7 @@ export const VideoDetail = ({ video }: { video: IYoutubeVideo }) => {
   const url = `https://www.youtube.com/embed/${videoId}`;
 
   return (
-    <div className='video-detail col'>
+    <div className='video-detail col-8'>
       <div className='embed-responsive embed-responsive-16by9'>
         <iframe src={url} className='embed-responsive-item' />
       </div>
