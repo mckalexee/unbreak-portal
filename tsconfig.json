@@ -20,7 +20,11 @@
     "paths": {
       "@components/*" :["src/components/*"],
       "@styles/*" :["src/styles/*"],
-      "@app/*" :["src/*"]
+      "@app/*" :["src/*"],
+      "@reducers/*": ["src/reducers/*"],
+      "@actions/*": ["src/actions/*"],
+      "@containers/*": ["src/containers/*"],
+      "@interfaces": ["src/interfaces"]
     }
   },
   "exclude": [
