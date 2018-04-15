@@ -1,8 +1,10 @@
+
 export interface IBook {
-  author: string;
   title: string;
+  pages: number;
 }
 
 export interface IState {
   books: IBook[];
+  activeBook: IBook;
 }

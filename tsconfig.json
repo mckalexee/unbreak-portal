@@ -24,7 +24,7 @@
       "@reducers/*": ["src/reducers/*"],
       "@actions/*": ["src/actions/*"],
       "@containers/*": ["src/containers/*"],
-      "@interfaces": ["src/interfaces"]
+      "@interfaces" : ["src/interfaces"]
     }
   },
   "exclude": [
