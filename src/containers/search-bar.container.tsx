@@ -1,13 +1,24 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { fetchWeather } from '@actions/actions';
+import { IState } from '@interfaces';
 
-export interface ISearchBarState {
+interface ISearchBarState {
   term: string;
 }
 
+export interface ISearchBarProps {
+  fetchWeather: typeof fetchWeather;
+}
 
-export class SearchBar extends Component<{}, ISearchBarState> {
+export interface IDispatchFromProps {
+  fetchWeather: typeof fetchWeather;
+}
+
+class SearchBar extends Component<ISearchBarProps, ISearchBarState> {
   constructor(props: any) {
     super(props);
 
@@ -22,6 +33,9 @@ export class SearchBar extends Component<{}, ISearchBarState> {
 
   onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    this.props.fetchWeather(this.state.term);
+    this.setState({ term: '' });
   }
 
   render() {
@@ -41,3 +55,9 @@ export class SearchBar extends Component<{}, ISearchBarState> {
     );
   }
 }
+
+function mapDispatchToProps(dispatch: any) {
+  return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+export default connect<IState, IDispatchFromProps, void>(null, mapDispatchToProps)(SearchBar);
