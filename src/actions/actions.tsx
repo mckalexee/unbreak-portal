@@ -1,10 +1,8 @@
-import { BOOK_SELECTED } from '@actions/action-types';
-import { IBook } from '@interfaces';
+import { FOO_ACTION } from '@actions/action-types';
 
-export function selectBook(book: IBook) {
-
+export function selectFoo(value: string) {
   return {
-    type: BOOK_SELECTED,
-    payload: book
+    type: FOO_ACTION,
+    payload: value
   };
 }

@@ -1,6 +1,6 @@
-export const BOOK_SELECTED = 'BOOK_SELECTED';
+export const FOO_ACTION = 'FOO_ACTION';
 
 export const ActionTypes = {
-  BOOK_SELECTED
+  FOO_ACTION
 };
 
