@@ -1,5 +1,6 @@
 export interface IState {
   posts: IPosts;
+  form: any;
 }
 
 export interface IPost {
