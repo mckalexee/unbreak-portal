@@ -1,6 +1,7 @@
-export const FOO_ACTION = 'FOO_ACTION';
+export const FETCH_POSTS = 'FETCH_POSTS';
+
 
 export const ActionTypes = {
-  FOO_ACTION
+  FETCH_POSTS
 };
 

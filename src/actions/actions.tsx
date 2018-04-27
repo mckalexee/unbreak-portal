@@ -1,8 +1,9 @@
-import { FOO_ACTION } from '@actions/action-types';
+import {fetchPosts} from '@actions/fetch-posts.action';
 
-export function selectFoo(value: string) {
-  return {
-    type: FOO_ACTION,
-    payload: value
-  };
-}
+export {
+  fetchPosts
+};
+
+export default {
+  fetchPosts
+};
