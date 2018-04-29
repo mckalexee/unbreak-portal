@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Component } from 'react';
-// import { connect } from 'react-redux';
-import { Field, InjectedFormProps, reduxForm,  } from 'redux-form';
+import { connect } from 'react-redux';
+import { Link, RouteComponentProps } from 'react-router-dom';
+import { Field, InjectedFormProps, reduxForm, } from 'redux-form';
+
+import { createPost } from '@actions/actions';
 
 
 // import { fetchPosts } from '@actions/actions';
@@ -14,11 +17,14 @@ import { Field, InjectedFormProps, reduxForm,  } from 'redux-form';
 //   fetchPosts: typeof fetchPosts;
 // }
 
-class PostsNew extends Component<InjectedFormProps<{}, {}>> {
+interface IPostsNewProps {
+  createPost: typeof createPost;
+}
+
+class PostsNew extends Component<IPostsNewProps & InjectedFormProps<{}> & RouteComponentProps<any> > {
   renderField(field: any) {
     const error = (field.meta.invalid && field.meta.touched) ? 'is-invalid' : '';
     const classes = `${error} form-control`;
-
     return (
       <div className='form-group'>
         <label>{field.label}</label>
@@ -35,7 +41,9 @@ class PostsNew extends Component<InjectedFormProps<{}, {}>> {
   }
 
   onSubmit(values: any) {
-    console.log(values);
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
@@ -59,12 +67,15 @@ class PostsNew extends Component<InjectedFormProps<{}, {}>> {
           component={this.renderField}
         />
         <button type='submit' className='btn btn-primary'>Submit</button>
+        <Link to='/' className='btn btn-danger'>
+          Cancel
+        </Link>
       </form>
     );
   }
 }
 
-function validate(values: {[key: string]: any}) {
+function validate(values: { [key: string]: any }) {
   const errors = {};
 
   const requiredFields = ['title', 'categories', 'content'];
@@ -80,6 +91,8 @@ function validate(values: {[key: string]: any}) {
 export const postsNew = reduxForm({
   validate,
   form: 'PostsNewForm'
-})(PostsNew);
+})(
+  connect(null, {createPost})(PostsNew)
+);
 
 // export const postsNew = connect(mapStateToProps, { fetchPosts })(PostsNew);

@@ -5,10 +5,10 @@ import { IPostsAction } from '@actions/fetch-posts.action';
 import { IPosts } from '@interfaces';
 
 export function PostsReducer(state: IPosts = {}, action: IPostsAction) {
+  console.log(action.type, state);
   switch (action.type) {
     case FETCH_POSTS:
       return _.mapKeys(action.payload.data, 'id');
-
     default:
       return state;
   }
