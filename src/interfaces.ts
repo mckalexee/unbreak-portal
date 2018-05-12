@@ -7,7 +7,7 @@ export interface IPost {
   title: string;
   id: number;
   content: string;
-  tags: string;
+  categories: string;
 }
 
 export interface IPosts {

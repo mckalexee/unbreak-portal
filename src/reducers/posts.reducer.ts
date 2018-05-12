@@ -1,14 +1,16 @@
 import * as _ from 'lodash';
+import { AnyAction } from 'redux';
 
-import { FETCH_POSTS } from '@actions/action-types';
-import { IPostsAction } from '@actions/fetch-posts.action';
-import { IPosts } from '@interfaces';
+import { FETCH_POST, FETCH_POSTS } from '@actions/action-types';
+import { IPost, IPosts } from '@interfaces';
 
-export function PostsReducer(state: IPosts = {}, action: IPostsAction) {
-  console.log(action.type, state);
+export function PostsReducer(state: IPosts = {}, action: AnyAction) {
   switch (action.type) {
+    case FETCH_POST:
+      return { ...state, [action.payload.data.id]: action.payload.data };
     case FETCH_POSTS:
-      return _.mapKeys(action.payload.data, 'id');
+      const posts: IPost[] = action.payload.data;
+      return _.mapKeys(posts, 'id');
     default:
       return state;
   }

@@ -11,6 +11,7 @@ import { rootReducer as reducers } from '@reducers/root.reducer';
 // Components
 import { postsIndex } from '@components/posts-index.component';
 import { postsNew } from '@components/posts-new.component';
+import { postsShow } from '@components/posts-show.component';
 
 import './styles/index.scss';
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <div className='container'>
         <Switch>
           <Route path='/posts/new' component={postsNew} />
+          <Route path='/posts/:id' component={postsShow} />
           <Route path='/' component={postsIndex} />
         </Switch>
       </div>

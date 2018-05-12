@@ -11,7 +11,7 @@ export interface IPostsAction extends AnyAction {
   payload: AxiosResponse<IPost[]>;
 }
 
-export function createPost(values: {[key: string]: any}, callback: () => void) {
+export function createPost(values: {[key: string]: any}, callback = () => {}) {
   const request = axios.post<IPost[]>(`${API_URL}/posts?key=${API_KEY}`, values);
 
   request.then(callback);

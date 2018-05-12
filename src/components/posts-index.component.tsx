@@ -29,7 +29,9 @@ class PostsIndex extends Component<IPostsIndexProps> {
     return _.map(this.props.state.posts, post => {
       return (
         <li key={post.id} className='list-group-item'>
+          <Link to={`/posts/${post.id}`}>
           {post.title}
+          </Link>
         </li>
       );
     });
